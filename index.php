@@ -120,7 +120,7 @@ $products = [
             <h2>Открытые лоты</h2>
         </div>
         <ul class="lots__list">
-            <?php if (is_array($products)) { ?>
+            <?php if (isset($products) && is_array($products)) { ?>
                 <?php foreach ($products as $key => $item) { ?>
                     <?php if (isset($item['name'], $item['cat'], $item['price'], $item['url'])) { ?>
                         <li class="lots__item lot">
@@ -153,7 +153,7 @@ $products = [
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
-            <?php if (is_array($categories)) { ?>
+            <?php if (isset ($categories) && is_array($categories)) { ?>
                 <?php foreach ($categories as $val) {
                     ?>
                     <li class="nav__item">
