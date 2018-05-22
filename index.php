@@ -1,9 +1,11 @@
 <?php
+declare(strict_types=1);
 $is_auth = (bool)rand(0, 1);
 
 $user_name = 'Константин';
 $user_avatar = 'img/user.jpg';
 $categories = ["Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"];
+
 $products = [
     [
         'name' => '2014 Rossignol District Snowboard',
@@ -41,9 +43,13 @@ $products = [
         'price' => '5400',
         'url' => 'img/lot-6.jpg'
     ]];
+/**
+ * @param int $price_value
+ * @return string
+ */
 
 
-function price_format($price_value){
+function format_price(int $price_value): string{
 	$price_value = ceil($price_value);
     $num = number_format ($price_value, 0, '', ' ');
     $num .= " <b class=\"rub\">&#8381;</b>";
@@ -140,7 +146,7 @@ function price_format($price_value){
                                 <div class="lot__state">
                                     <div class="lot__rate">
                                         <span class="lot__amount">Стартовая цена</span>
-                                        <span class="lot__cost"><?= price_format($item['price']); ?></span>
+                                        <span class="lot__cost"><?= format_price((int)$item['price']); ?></span>
                                     </div>
                                     <div class="lot__timer timer">
 
