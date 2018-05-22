@@ -44,6 +44,9 @@ $products = [
         'url' => 'img/lot-6.jpg'
     ]];
 /**
+ * Функция принимает целое число и
+ * возвращает отформатированную сумму со знаком рубля.
+ *
  * @param int $price_value
  * @return string
  */
@@ -155,8 +158,8 @@ function format_price(int $price_value): string{
                             </div>
                         </li>
 
-                    <?php };
-                };
+                    <?php }
+                }
             } ?>
         </ul>
     </section>
@@ -171,7 +174,7 @@ function format_price(int $price_value): string{
                     <li class="nav__item">
                         <a href="all-lots.html"><?= $val; ?></a>
                     </li>
-                <?php };
+                <?php }
             } ?>
         </ul>
     </nav>
