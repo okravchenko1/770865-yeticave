@@ -43,15 +43,14 @@ $products = [
         'price' => '5400',
         'url' => 'img/lot-6.jpg'
     ]];
-/**
+
+/**  
  * Функция принимает целое число и
  * возвращает отформатированную сумму со знаком рубля.
  *
  * @param int $price_value
  * @return string
  */
-
-
 function format_price(int $price_value): string{
 	$price_value = ceil($price_value);
     $num = number_format ($price_value, 0, '', ' ');
