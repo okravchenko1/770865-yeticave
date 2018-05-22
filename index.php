@@ -1,9 +1,11 @@
 <?php
+declare(strict_types=1);
 $is_auth = (bool)rand(0, 1);
 
 $user_name = 'Константин';
 $user_avatar = 'img/user.jpg';
 $categories = ["Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"];
+
 $products = [
     [
         'name' => '2014 Rossignol District Snowboard',
@@ -42,7 +44,19 @@ $products = [
         'url' => 'img/lot-6.jpg'
     ]];
 
-
+/**  
+ * Функция принимает целое число и
+ * возвращает отформатированную сумму со знаком рубля.
+ *
+ * @param int $price_value
+ * @return string
+ */
+function format_price(int $price_value): string{
+	$price_value = ceil($price_value);
+    $num = number_format ($price_value, 0, '', ' ');
+    $num .= " <b class=\"rub\">&#8381;</b>";
+	return $num;
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -134,7 +148,7 @@ $products = [
                                 <div class="lot__state">
                                     <div class="lot__rate">
                                         <span class="lot__amount">Стартовая цена</span>
-                                        <span class="lot__cost"><?= $item['price']; ?><b class="rub">р</b></span>
+                                        <span class="lot__cost"><?= format_price((int)$item['price']); ?></span>
                                     </div>
                                     <div class="lot__timer timer">
 
@@ -143,8 +157,8 @@ $products = [
                             </div>
                         </li>
 
-                    <?php };
-                };
+                    <?php }
+                }
             } ?>
         </ul>
     </section>
@@ -159,7 +173,7 @@ $products = [
                     <li class="nav__item">
                         <a href="all-lots.html"><?= $val; ?></a>
                     </li>
-                <?php };
+                <?php }
             } ?>
         </ul>
     </nav>
