@@ -46,7 +46,7 @@
                                     <span class="lot__cost"><?= format_price((int)$item['price']); ?></span>
                                 </div>
                                 <div class="lot__timer timer">
-
+                                    <?= lot_expire(); ?>
                                 </div>
                             </div>
                         </div>
