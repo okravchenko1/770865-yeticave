@@ -33,14 +33,13 @@ function include_template(string $filename, array $param = []): string
     return ob_get_clean();
 }
 
-date_default_timezone_set('Europe/Moscow');
-
 /**
- * Функция для вывода окончания ставок на лот
+ *  Функция для вывода окончания ставок на лот
  *
  * @return string
  */
-function lot_expire() {
+function lot_expire():string {
+    date_default_timezone_set('Europe/Moscow');
     $ts_midnight = strtotime('tomorrow');
     $time_till_midnight = $ts_midnight - time();
     $hour = floor($time_till_midnight / 3600);
