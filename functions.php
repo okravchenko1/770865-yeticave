@@ -27,9 +27,23 @@ function include_template(string $filename, array $param = []): string
     if (!file_exists('templates' . DIRECTORY_SEPARATOR . $filename . '.php')) {
         return print('');
     }
-    extract($param);
+    extract($param, EXTR_OVERWRITE);
     ob_start();
     require('templates' . DIRECTORY_SEPARATOR . $filename . '.php');
     return ob_get_clean();
 }
-?>
+
+/**
+ *  Функция для вывода окончания ставок на лот
+ *
+ * @return string
+ */
+function lot_expire():string {
+    date_default_timezone_set('Europe/Moscow');
+    $ts_midnight = strtotime('tomorrow');
+    $time_till_midnight = $ts_midnight - time();
+    $hour = floor($time_till_midnight / 3600);
+    $minute = floor(($time_till_midnight % 3600)/ 60);
+    $expire = $hour . ':' . $minute;
+    return strftime('%R', strtotime($expire));
+}
