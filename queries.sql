@@ -27,7 +27,7 @@ VALUES ("2018-05-19 21:15:02", 8200, 1, 3),
 SELECT id, name FROM categories;
 
 -- выбор новых лотов (получить самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, количество ставок, название категории)
-SELECT l.name, l.start_price, l.image, MAX(b.bet_sum)+l.lot_step AS betPrice, COUNT(b.lot_id) AS betCount, c.name
+SELECT l.id, l.name, l.start_price, l.image, MAX(b.bet_sum) AS betPrice, COUNT(b.lot_id) AS betCount, c.name
 FROM bets b
 LEFT JOIN lots l
 ON b.lot_id = l.id
@@ -38,7 +38,7 @@ GROUP BY l.id
 ORDER BY l.creation_date DESC;
 
 -- выбор лота по его id (показать лот по его id. Получение названия категории, к которой принадлежит лот)
-SELECT l.name, c.name FROM lots l
+SELECT l.id, l.name, c.name FROM lots l
 	LEFT JOIN categories c
 	ON l.category_id = c.id
 	WHERE c.id = '2';
