@@ -9,24 +9,24 @@ CREATE DATABASE IF NOT EXISTS yeticave
   CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   reg_date DATETIME,
-  email VARCHAR(64),
-  name VARCHAR(128),
-  password VARCHAR(64),
+  email VARCHAR(64) NOT NULL,
+  name VARCHAR(128) NOT NULL,
+  password VARCHAR(64) NOT NULL,
   avatar VARCHAR(128),
-  contact VARCHAR(128)
+  contact VARCHAR(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE categories (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(128)
+  name VARCHAR(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE bets (
   id INT AUTO_INCREMENT PRIMARY KEY,
   date DATETIME,
   bet_sum INT,
-  user_id INT,
-  lot_id INT,
+  user_id INT NOT NULL,
+  lot_id INT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (lot_id) REFERENCES lots(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -34,15 +34,15 @@ CREATE TABLE bets (
 CREATE TABLE lots (
   id INT AUTO_INCREMENT PRIMARY KEY,
   creation_date DATETIME,
-  name VARCHAR(128),
-  description VARCHAR(128),
-  image VARCHAR(128),
-  start_price INT,
-  end_date DATETIME,
-  lot_step INT,
-  author_id INT,
+  name VARCHAR(128) NOT NULL,
+  description VARCHAR(128) NOT NULL,
+  image VARCHAR(128) NOT NULL,
+  start_price INT NOT NULL,
+  end_date DATETIME NOT NULL,
+  lot_step INT NOT NULL,
+  author_id INT NOT NULL,
   win_id INT,
-  category_id INT,
+  category_id INT NOT NULL,
   FOREIGN KEY (category_id) REFERENCES categories(id),
   FOREIGN KEY (author_id) REFERENCES users(id),
   FOREIGN KEY (win_id) REFERENCES users(id)
