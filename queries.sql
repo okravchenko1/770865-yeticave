@@ -27,20 +27,21 @@ VALUES ("2018-05-19 21:15:02", 8200, 1, 3),
 SELECT id, name FROM categories;
 
 -- выбор новых лотов (получить самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, количество ставок, название категории)
-
-SELECT lots.name, lots.start_price, lots.image, categories.name as category, COUNT(bets.lot_id) as betCount, MAX(bets.bet_sum) + lots.lot_step as betPrice
-FROM lots
-INNER JOIN categories ON lots.category_id = categories.id
-LEFT JOIN bets ON lots.id = bets.lot_id
-WHERE lots.end_date > NOW()
-GROUP BY lots.name, lots.start_price, lots.image, categories.name, lots.creation_date, lots.id
-ORDER BY lots.creation_date DESC;
+SELECT l.name, l.start_price, l.image, MAX(b.bet_sum)+l.lot_step AS betPrice, COUNT(b.lot_id) AS betCount, c.name
+FROM bets b
+LEFT JOIN lots l
+ON b.lot_id = l.id
+JOIN categories c
+ON l.category_id = c.id
+WHERE NOW() < l.end_date
+GROUP BY l.id
+ORDER BY l.creation_date DESC;
 
 -- выбор лота по его id (показать лот по его id. Получение названия категории, к которой принадлежит лот)
-SELECT lots.name, categories.name
-FROM lots
-LEFT JOIN categories ON lots.category_id = categories.id
-WHERE lots.id = 2;
+SELECT l.name, c.name FROM lots l
+	LEFT JOIN categories c
+	ON l.category_id = c.id
+	WHERE c.id = '2';
 
 -- обновление лота (обновить название лота по его идентификатору)
 UPDATE lots SET name = "Крепления Union Contact Pro 2015 года размер L/XL S++"
