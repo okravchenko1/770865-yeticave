@@ -1,9 +1,9 @@
 -- добавление категорий
-INSERT INTO categories (id, name)
+INSERT INTO categories (id, category_name)
 VALUES ("1", "Доски и лыжи"), ("2", "Крепления"), ("3", "Ботинки"), ("4", "Одежда"), ("5", "Инструменты"), ("6", "Разное");
 
 -- добавление пользователей
-INSERT INTO users (id, reg_date, email, name, password, avatar, contact)
+INSERT INTO users (id, reg_date, email, username, password, avatar, contact)
 VALUES ("1", "2018-05-18 13:21:15", "vladimirv87@mail.ru", "Владимир", "GbnFr6!ff", "img/vladimirv.jpg", "Russia"),
        ("2", "2018-05-18 14:47:31", "knight137@yandex.ru", "Андрей", "123456qqwr", "img/andreyk.jpg", "Russia"),
        ("3", "2018-05-19 14:52:17", "tvklimova01@gmail.com", "Татьяна", "tYbb76F4R30", "img/tvk.jpg", "Russia");
@@ -24,10 +24,10 @@ VALUES ("2018-05-19 21:15:02", 8200, 1, 3),
        ("2018-05-19 19:23:11", 162000, 3, 2);
 
 -- выбор всех категорий (получить все категории)
-SELECT id, name FROM categories;
+SELECT id, category_name FROM categories;
 
 -- выбор новых лотов (получить самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, количество ставок, название категории)
-SELECT l.id, l.name, l.start_price, l.image, MAX(b.bet_sum) AS betPrice, COUNT(b.lot_id) AS betCount, c.name
+SELECT l.id, l.name, l.start_price, l.image, MAX(b.bet_sum) AS bet_price, COUNT(b.lot_id) AS bet_count, c.category_name
 FROM bets b
 LEFT JOIN lots l
 ON b.lot_id = l.id
@@ -38,7 +38,7 @@ GROUP BY l.id
 ORDER BY l.creation_date DESC;
 
 -- выбор лота по его id (показать лот по его id. Получение названия категории, к которой принадлежит лот)
-SELECT l.id, l.name, c.name FROM lots l
+SELECT l.id, l.name, c.category_name FROM lots l
 	LEFT JOIN categories c
 	ON l.category_id = c.id
 	WHERE c.id = '2';
