@@ -13,7 +13,7 @@ CREATE DATABASE IF NOT EXISTS yeticave
   username VARCHAR(128) NOT NULL,
   password VARCHAR(64) NOT NULL,
   avatar VARCHAR(128),
-  contact VARCHAR(128) NOT NULL
+  contact VARCHAR(128)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE categories (
