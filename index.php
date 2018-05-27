@@ -3,8 +3,6 @@ require_once('functions.php');
 $is_auth = (bool) rand(0, 1);
 $user_name = 'Константин';
 $user_avatar = 'img/user.jpg';
-$connect = mysqli_connect('localhost', 'root', '', 'yeticave');
-mysqli_set_charset($connect, "utf8");
 
 if (!$connect) {
     exit('Ошибка подключения к БД');

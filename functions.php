@@ -1,5 +1,7 @@
 <?php
 declare(strict_types=1);
+$connect = mysqli_connect('localhost', 'root', '', 'yeticave');
+mysqli_set_charset($connect, "utf8");
 
 /**
  * Функция принимает целое число и
@@ -81,6 +83,14 @@ function getCategoryList(mysqli $connect):array {
     return $array;
 }
 
+function getBetsList(mysqli $connect):array {
+    $sql =  'SELECT id, date,  bet_sum, user_id, lot_id FROM bets ORDER BY id ASC;';
+    $result = mysqli_query($connect, $sql);
+    if ($result) {
+        $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+    return $array;
+}
 /**
  * Получение лота по его id
  *
@@ -88,7 +98,7 @@ function getCategoryList(mysqli $connect):array {
  * @param int $id
  * @return array
  */
-function getLotById(mysqli $connect, int $id):array {
+function getLotById(mysqli $connect, int $id, array $array = []):array {
     $id = intval($id);
     $sql = "SELECT name, image, description, start_price, lot_step, category_id FROM lots WHERE id='$id'";
     $result = mysqli_query($connect, $sql);
@@ -96,4 +106,51 @@ function getLotById(mysqli $connect, int $id):array {
         $array = mysqli_fetch_assoc($result);
     }
     return $array;
+}
+
+/**
+ * @param mysqli $connect
+ * @param int $id
+ * @param array $array
+ * @return array|null
+ */
+function getBetsById(mysqli $connect, int $id, array $array=[]):array {
+    $id = intval($id);
+    $sql = "SELECT b.date, b.bet_sum, u.username as user_name FROM bets b
+                LEFT JOIN users u
+                ON b.user_id = u.id
+                WHERE lot_id='$id' ORDER BY date DESC";
+    $result = mysqli_query($connect, $sql);
+    if ($result) {
+        $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+    return $array;
+}
+
+/**
+ *  Рассчитываем плэйсхолдер для поля "Ваша ставка"
+Приведение к типу ($lot получен из БД)
+ *
+ * @param mysqli $connect
+ * @param int $id
+ * @param array $lot
+ * @return mixed
+ */
+function userBet(mysqli $connect, int $id, array $lot=[]):int {
+    $id = intval($id);
+    $sql = "SELECT l.start_price as start_price, l.lot_step as lot_step, COUNT(b.id) as bet_count, MAX(b.bet_sum) as current_max_price FROM bets b
+                LEFT JOIN lots l
+                ON b.lot_id = l.id
+                WHERE end_date IS NULL AND l.id = '$id' GROUP BY l.id";
+    $result = mysqli_query($connect, $sql);
+    if ($result) {
+        $array = mysqli_fetch_assoc($result);
+        if (empty($array['current_max_price'])) {
+            $userBet = (int)$lot['start_price'] + (int)$lot['lot_step'];
+        }
+        else {
+            $userBet = (int)$array['current_max_price'] + (int)$lot['lot_step'];
+        }
+    }
+    return $userBet;
 }
