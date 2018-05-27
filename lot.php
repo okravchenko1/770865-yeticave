@@ -11,8 +11,9 @@ $yourBet = NULL;
 if (isset($_GET['id']) && in_array(intval($_GET['id']), array_column($product, 'id'))) {
     $product = getLotById($connect, $_GET['id'], $product);
     $bet = getBetsById($connect, $_GET['id'], $bets);
+    $bet_counter = count($bet);
     $userbet = userBet($connect, $_GET['id'], $product);
-    $pageContent = include_template('lot', ['categories' => $categories, 'product' => $product, 'bet' => $bet, 'userBet' => $userbet]);
+    $pageContent = include_template('lot', ['categories' => $categories, 'product' => $product, 'bet' => $bet, 'userBet' => $userbet, 'bet_counter' => $bet_counter]);
     $layout_content = include_template('layout', [
         'pageContent' => $pageContent,
         'categories' => $categories,

@@ -31,7 +31,7 @@
                 <div class="lot-item__cost-state">
                     <div class="lot-item__rate">
                         <span class="lot-item__amount">Текущая цена</span>
-                        <span class="lot-item__cost"><?= $userBet-$product['lot_step']; ?></span>
+                        <span class="lot-item__cost"><?= $userBet; ?></span>
                     </div>
                     <div class="lot-item__min-cost">
                         Мин. ставка <span><?= $userBet ?></span>
@@ -46,7 +46,7 @@
                 </form>
             </div>
             <div class="history">
-                <h3>История ставок (<span><?=count($bet);?></span>)</h3>
+                <h3>История ставок (<span><?=$bet_counter;?></span>)</h3>
                 <table class="history__list">
                     <?php foreach($bet as $val): ?>
                         <tr class="history__item">

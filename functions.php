@@ -128,13 +128,12 @@ function getBetsById(mysqli $connect, int $id, array $array=[]):array {
 }
 
 /**
- *  Рассчитываем плэйсхолдер для поля "Ваша ставка"
-Приведение к типу ($lot получен из БД)
+ * Рассчитываем placeholder для поля "Ваша ставка"
  *
  * @param mysqli $connect
  * @param int $id
  * @param array $lot
- * @return mixed
+ * @return int
  */
 function userBet(mysqli $connect, int $id, array $lot=[]):int {
     $id = intval($id);
@@ -154,3 +153,4 @@ function userBet(mysqli $connect, int $id, array $lot=[]):int {
     }
     return $userBet;
 }
+
