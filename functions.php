@@ -64,7 +64,7 @@ function getLotsSortedByDate(mysqli $connect):array {
         $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
     return $array;
-};
+}
 
 /**
  *  * Получение списка категорий
@@ -79,4 +79,4 @@ function getCategoryList(mysqli $connect):array {
         $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
     return $array;
-};
+}
