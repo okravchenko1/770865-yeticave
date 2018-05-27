@@ -1,8 +1,10 @@
 <?php
 require_once('functions.php');
+$is_auth = (bool) rand(0, 1);
+$user_name = 'Константин';
+$user_avatar = 'img/user.jpg';
 $connect = mysqli_connect('localhost', 'root', '', 'yeticave');
 mysqli_set_charset($connect, "utf8");
-
 
 if (!$connect) {
     print('Ошибка подключения: ' .mysqli_connect_error());
@@ -17,6 +19,5 @@ else {
         'is_auth' => $is_auth,
         'title' => 'YetiCave - Главная']);
     echo $layout_content;
-
 }
 ?>
