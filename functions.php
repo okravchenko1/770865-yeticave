@@ -51,38 +51,32 @@ function lot_expire():string {
 }
 
 /**
- * Получение списка лотов, отсортированных по дате создания
+ * * Получение списка лотов, отсортированных по дате создания
  * (самые новые)
  *
- * @param $link
+ * @param mysqli $connect
  * @return array
  */
-function getLotsSortedByDate($connect):array {
+function getLotsSortedByDate(mysqli $connect):array {
     $sql = 'SELECT id, name, creation_date,  description, image, start_price, category_id FROM lots WHERE end_date>NOW() ORDER BY creation_date DESC';
     $result = mysqli_query($connect, $sql);
     if ($result) {
         $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
-    else {
-        $errors[] = mysqli_error($connect);
-    }
     return $array;
 };
 
 /**
- * Получение списка категорий
+ *  * Получение списка категорий
  *
- * @param $link
+ * @param mysqli $connect
  * @return array
  */
-function getCategoryList($connect):array {
+function getCategoryList(mysqli $connect):array {
     $sql =  'SELECT id, category_name FROM categories ORDER BY id ASC;';
     $result = mysqli_query($connect, $sql);
     if ($result) {
         $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    }
-    else {
-        $errors[] = mysqli_error($connect);
     }
     return $array;
 };

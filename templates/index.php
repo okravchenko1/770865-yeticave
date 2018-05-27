@@ -31,8 +31,8 @@
     <ul class="lots__list">
         <?php if (isset($products) && is_array($products)) { ?>
             <?php foreach ($products as $product) { ?>
-                <?//php if (isset($item['name'], $item['category'], $item['start_price'], $item['image'])) { ?>
-                    <li class="lots__item lot">
+                <?php if (isset($product['name'], $product['start_price'], $product['image'])) { ?>
+                <li class="lots__item lot">
                         <div class="lot__image">
                             <img src="<?= $product['image']; ?>" width="350" height="260" alt="<?= htmlspecialchars($product['name']); ?>">
                         </div>
@@ -52,7 +52,7 @@
                         </div>
                     </li>
 
-                <?php //}
+                <?php }
             }
         } ?>
     </ul>
