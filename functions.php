@@ -64,7 +64,7 @@ function getLotsSortedByDate(mysqli $connect):array {
         $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
     return $array;
-};
+}
 
 /**
  *  * Получение списка категорий
@@ -79,4 +79,21 @@ function getCategoryList(mysqli $connect):array {
         $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
     return $array;
-};
+}
+
+/**
+ * Получение лота по его id
+ *
+ * @param mysqli $connect
+ * @param int $id
+ * @return array
+ */
+function getLotById(mysqli $connect, int $id):array {
+    $id = intval($id);
+    $sql = "SELECT name, image, description, start_price, lot_step, category_id FROM lots WHERE id='$id'";
+    $result = mysqli_query($connect, $sql);
+    if ($result) {
+        $array = mysqli_fetch_assoc($result);
+    }
+    return $array;
+}
