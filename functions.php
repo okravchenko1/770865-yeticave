@@ -49,3 +49,34 @@ function lot_expire():string {
     $expire = $hour . ':' . $minute;
     return strftime('%R', strtotime($expire));
 }
+
+/**
+ * * Получение списка лотов, отсортированных по дате создания
+ * (самые новые)
+ *
+ * @param mysqli $connect
+ * @return array
+ */
+function getLotsSortedByDate(mysqli $connect):array {
+    $sql = 'SELECT id, name, creation_date,  description, image, start_price, category_id FROM lots WHERE end_date>NOW() ORDER BY creation_date DESC';
+    $result = mysqli_query($connect, $sql);
+    if ($result) {
+        $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+    return $array;
+};
+
+/**
+ *  * Получение списка категорий
+ *
+ * @param mysqli $connect
+ * @return array
+ */
+function getCategoryList(mysqli $connect):array {
+    $sql =  'SELECT id, category_name FROM categories ORDER BY id ASC;';
+    $result = mysqli_query($connect, $sql);
+    if ($result) {
+        $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+    return $array;
+};

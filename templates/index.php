@@ -29,21 +29,21 @@
         <h2>Открытые лоты</h2>
     </div>
     <ul class="lots__list">
-        <?php if (isset($products) && is_array($products)) { ?>
-            <?php foreach ($products as $key => $item) { ?>
-                <?php if (isset($item['name'], $item['cat'], $item['price'], $item['url'])) { ?>
-                    <li class="lots__item lot">
+        <?php if (isset($products) && is_array($products) && isset($categories)) { ?>
+            <?php foreach ($products as $product) { ?>
+                <?php if (isset($product['name'], $product['start_price'], $product['image'], $product['category_id'], $categories[$product['category_id']]['category_name'])) { ?>
+                <li class="lots__item lot">
                         <div class="lot__image">
-                            <img src="<?= $item['url']; ?>" width="350" height="260" alt="<?= htmlspecialchars($item['name']); ?>">
+                            <img src="<?= $product['image']; ?>" width="350" height="260" alt="<?= htmlspecialchars($product['name']); ?>">
                         </div>
                         <div class="lot__info">
-                            <span class="lot__category"><?= htmlspecialchars($item['cat']) ; ?></span>
-                            <h3 class="lot__title"><a class="text-link" href="lot.html"><?= htmlspecialchars($item['name']); ?></a>
+                                <span class="lot__category"><?= htmlspecialchars($categories[$product['category_id']]['category_name']) ; ?></span>
+                            <h3 class="lot__title"><a class="text-link" href="lot.html"><?= htmlspecialchars($product['name']); ?></a>
                             </h3>
                             <div class="lot__state">
                                 <div class="lot__rate">
                                     <span class="lot__amount">Стартовая цена</span>
-                                    <span class="lot__cost"><?= format_price((int)$item['price']); ?></span>
+                                    <span class="lot__cost"><?= format_price((int)$product['start_price']); ?></span>
                                 </div>
                                 <div class="lot__timer timer">
                                     <?= lot_expire(); ?>

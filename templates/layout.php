@@ -51,12 +51,13 @@
     <nav class="nav">
         <ul class="nav__list container">
             <?php if (isset ($categories) && is_array($categories)) { ?>
-                <?php foreach ($categories as $val) {
-                    ?>
+                <?php foreach ($categories as $val) { ?>
+                    <?php if (isset($val['category_name'])){ ?>
                     <li class="nav__item">
-                        <a href="all-lots.html"><?= $val; ?></a>
+                        <a href="all-lots.html"><?= htmlspecialchars($val['category_name']); ?></a>
                     </li>
                 <?php }
+                }
             } ?>
         </ul>
     </nav>

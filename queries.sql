@@ -1,6 +1,6 @@
 -- добавление категорий
 INSERT INTO categories (id, category_name)
-VALUES ("1", "Доски и лыжи"), ("2", "Крепления"), ("3", "Ботинки"), ("4", "Одежда"), ("5", "Инструменты"), ("6", "Разное");
+VALUES ("1", "Доски и лыжи"), ("2", "Крепления"), ("3", "Ботинки"), ("4", "Одежда"), ("5", "Инструменты"), ("6", "Разное"), ("7", "Аксессуары");
 
 -- добавление пользователей
 INSERT INTO users (id, reg_date, email, username, password, avatar, contact)
@@ -15,7 +15,8 @@ VALUES ("1", "2018-05-18 09:15:46", "2014 Rossignol District Snowboard", "no des
        ("3", "2018-05-19 18:52:07", "Крепления Union Contact Pro 2015 года размер L/XL", "no description", "img/lot-3.jpg", 8000, "2018-05-30 23:59:59", 100, 2, 2, NULL),
        ("4", "2018-05-19 11:20:03", "Ботинки для сноуборда DC Mutiny Charocal", "no description", "img/lot-4.jpg", 10999, "2018-05-30 23:59:59", 200, 3, 3, NULL),
        ("5", "2018-05-18 08:16:57", "Куртка для сноуборда DC Mutiny Charocal", "no description", "img/lot-5.jpg", 7500, "2018-05-30 23:59:59", 100, 4, 1, NULL),
-       ("6", "2018-05-19 17:50:33", "Маска Oakley Canopy", "no description", "img/lot-6.jpg", 5400, "2018-05-30 23:59:59", 100, 6, 3, NULL);
+       ("6", "2018-05-19 17:50:33", "Маска Oakley Canopy", "no description", "img/lot-6.jpg", 5400, "2018-05-30 23:59:59", 100, 6, 3, NULL),
+       ("7", "2018-05-27 12:29:10", "Сноуборд Snow Snake CUSTOM U1 (15-16), 140 см", "no description", "img/lot-7.jpg", 7000, "2018-05-30 23:59:59", 100, 4, 1, NULL);
 
 -- добавление ставок
 INSERT INTO bets (date, bet_sum, user_id, lot_id)
