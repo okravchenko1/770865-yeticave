@@ -13,6 +13,7 @@
     </ul>
 </nav>
 <section class="lot-item container">
+    <?php if (isset($product['name'], $product['description'], $product['start_price'], $product['image'], $product['category_id'], $categories[$product['category_id']]['category_name'])) { ?>
     <h2><?= htmlspecialchars($product['name']) ?></h2>
     <div class="lot-item__content">
         <div class="lot-item__left">
@@ -62,4 +63,5 @@
             </div>
         </div>
     </div>
+    <?php }?>
 </section>
