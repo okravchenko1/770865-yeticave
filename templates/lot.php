@@ -48,13 +48,16 @@
             <div class="history">
                 <h3>История ставок (<span><?=$bet_counter;?></span>)</h3>
                 <table class="history__list">
+                    <?php if (isset ($bet) && is_array($bet)) { ?>
                     <?php foreach($bet as $val): ?>
+                    <?php if (isset($val['user_name'], $val['bet_sum'], $val['date'])) { ?>
                         <tr class="history__item">
                             <td class="history__name"><?=$val['user_name']; ?></td>
                             <td class="history__price"><?=$val['bet_sum']; ?></td>
                             <td class="history__time"><?=$val['date']; ?></td>
-                        </tr>
-                    <?php endforeach; ?>
+                        </tr><?php }?>
+                    <?php endforeach ?>
+                    <?php }?>
                 </table>
             </div>
         </div>
